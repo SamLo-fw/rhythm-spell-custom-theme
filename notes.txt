@@ -1,0 +1,68 @@
+- the fade-in on key notes appears to be 50% of the early/late time
+
+
+100%-80% accuracy: YEAH!
+>80%-65% accuracy: NICE!
+>65%-50% accuracy: GOOD
+>50%-25% accuracy: OK
+>25%-0% accuracy: MID
+0%: Miss
+
+ex: 1 beat early late:
+
+0-0.25 -> MID
+0.25-0.5 -> OK
+
+etc etc
+
+and 1-1.2 -> YEAH!
+1.2-1.35 -> NICE!
+.. and so on.
+
+
+- actions in the same grouping seem to be order-dependant. if I set an action to go to 100% opacity at beat 0 over 2 beats, and then 0% at beat 0 over 0 beats but AFTER the first action, it seems the second one plays.
+basically the actions system only queues one transform at a time per type per action type?
+
+if you miss, the 3 base sprites turn red and drop down over ~1 second. so the total exist time for a sprite: early/late time + 1 second
+
+
+when a note is pressed, there's an outline that expands and fades as feedback. This is invariant compared to the BPM/early late time. 
+~250ms seems to be a decent approximation.
+
+key-touch is comprised of:
+
+- the base, called QMode1
+- a thin overlay, called QMode1 overline
+- the text
+
+the approach has
+- QMode1 line, which is the triple layered approach circle. Set to about sizes of 1.0x, 1.04x, and 1.08x.
+- the 1.0x sprite size stays on the actual sprite when the approach is done
+
+when pressed, there's a pulse generated that fades out over ~205ms, which in-game seems to be the QMode1 line sprite but on paper can be something else
+
+key-keep is comprised of:
+
+- the base, QMode2
+- for some reason the thin overlay sprite in the game files is wrong and needs to be scaled by 1.033x but it's called QMode2 overline
+- and the text
+
+- the approach is the same, but QMode line doesn't acutally appear on the object. Instead, it appears at a roughly 1.5x size, and shrinks from the timestamp
+of the object until the late time ends. in terms of actions, the best comprimise is to have it render early, which does diverge from the game's native experience.
+otherwise I can't communicate the action to a nonexistant object.
+
+
+-issues: key-touch might still be fading in as it fades out when pressed, which measn that the fade-in ends after the fade out and causes some amoutn of opacity > 0.
+	-resolution: delete the objects instead of hiding them
+
+- you can also slide the notes over the course of the object as needed + the slide line.
+	-let users upload a 32x32 sprite for the slide line?
+	
+
+key-hit is comprised of:
+the same base+overline+text setup.
+comprimise: Then, the actual underlying objects are n key-touch objects for each hit of the key-hit. The first extends over the whole length 
+of the note. The rest last exactly as long as then to the next object.
+Each hit creates the pulse, alongside the growing number. All the numbers actaully render beforehand, but they're all bound to different 
+groups. they are deleted on press. 
+Growing darken sprite.
