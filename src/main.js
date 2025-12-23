@@ -1,12 +1,7 @@
 import {mount} from "./ui/render.js";
+import {state} from "./core/data.js";
 
 document.getElementById("nojs").remove();
-
-const state = {
-    uiState: "main",
-    activeUpload: null,
-    files: {}
-}
 
 mount(state);
 

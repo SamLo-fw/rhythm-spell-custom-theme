@@ -1,4 +1,5 @@
 import { App } from "./components.js";
+import {KEY_TYPES} from "../core/data.js";
 
 //you are allowed to render the UI based on the state.
 
@@ -77,17 +78,15 @@ function drawFileToCanvas(canvas, file, context){
 
 function handleCanvas(state){
   const boundingBox = document.getElementsByClassName("rendering-box")[0];
-  const KEY_TYPES = ["key-touch", "key-keep", "key-hit"];
-  const FILE_TYPES = ["base", "overline", "pulse", "font"];
 
-  for(const keyType of KEY_TYPES){
+  for(const keyType of Object.keys(KEY_TYPES)){
     const canvas = document.getElementsByClassName(`${keyType}-canvas`)[0];
     if(!canvas) console.log(`no canvas found for ${keyType}`)
     const context = canvas.getContext("2d");
 
     context.clearRect(0, 0, canvas.width, canvas.height);
     
-    for(const fileType of FILE_TYPES){
+    for(const fileType of KEY_TYPES[keyType]){
       const fileKey = `${keyType}-${fileType}`
       const file = state.files[fileKey];
       if(!file){console.log(`no file found for ${fileKey}`);}

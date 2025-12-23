@@ -1,4 +1,6 @@
-import {update} from "./render.js"
+import {update} from "./render.js";
+import {KEY_TYPES} from "../core/data.js";
+import {state} from "../core/data.js";
 
 function MainBox(state){
     return{
@@ -25,27 +27,15 @@ function FontUploadButton(state){
     };
 }
 
-const KEY_TPYES = [
-    {id: "key-touch"},
-    {id: "key-keep"},
-    {id: "key-hit"}
-]
-
-const INPUT_INFO = [
-    {id: "base"},
-    {id: "overline"},
-    {id: "pulse"}
-]
-
 function UploadButton(state, keyType, inputInfo){
-    const activeUpload = `${keyType.id}-${inputInfo.id}`
+    const activeUpload = `${keyType}-${inputInfo}`
 
     return{
         type:"button",
         children:[],
         innerHTML: "select png...",
-        properties:{
-            className: `${keyType.id}-${inputInfo.id}-button`,
+        properties:{ 
+            className: `${keyType}-${inputInfo}-button`,
             onclick: () => {
                 state.activeUpload = activeUpload;
                 console.log(activeUpload);
@@ -59,8 +49,8 @@ function KeyInfoBox(state, keyType, inputInfo){
     return{
         type:"div",
         children:[UploadButton(state, keyType, inputInfo)],
-        innerHTML: `choose a file for ${keyType.id} ${inputInfo.id}`,
-        properties:{className: `${keyType.id}-${inputInfo.id}-box`}
+        innerHTML: `choose a file for ${keyType} ${inputInfo}`,
+        properties:{className: `${keyType}-${inputInfo}-box`}
     }
 }
 
@@ -68,28 +58,40 @@ function UploadPanel(state){
     return{
         type: "div",
         properties: {className: "upload-panel"},
-        children: KEY_TPYES.map(
+        children: Object.keys(KEY_TYPES).map(
             keyType => KeyTypeBox(state, keyType)
         )
     }
 }
 
+function FontOption(state, keyType, fontName){
+    //will implement for custom fonts later
+    return{
+        type:"option",
+        properties: {className: `font-option-${fontName}`},
+        innerHTML: `${fontName}`,
+        children: []
+    }
+}
+
+function Font
+
 function KeyTypeBox(state, keyType){
     const font_button = [{
         type:"div",
-        properties: {className: `${keyType.id}-font-box`},
-        innerHTML: `choose a font for ${keyType.id}`,
+        properties: {className: `${keyType}-font-box`},
+        innerHTML: `choose a font for ${keyType}`,
         children: [{
             type:"select",
-            properties: {className: `${keyType.id}-font-button`, name: `choose a font for ${keyType.id}`},
+            properties: {className: `${keyType}-font-button`, name: `choose a font for ${keyType}`},
             children:[]
         }]
     }]
 
     return{
         type:"div",
-        properties: {className: `${keyType.id}-box`},
-        children: INPUT_INFO.map(
+        properties: {className: `${keyType}-box`},
+        children: KEY_TYPES[keyType].map(
             inputInfo => KeyInfoBox(state, keyType, inputInfo)
         ).concat(font_button)
     }
