@@ -66,3 +66,21 @@ of the note. The rest last exactly as long as then to the next object.
 Each hit creates the pulse, alongside the growing number. All the numbers actaully render beforehand, but they're all bound to different 
 groups. they are deleted on press. 
 Growing darken sprite.
+
+
+
+key-touch:
+- base, font, approach fade in over early time/2 on object creation
+- if you hit the key, pulse grow and fade, base, font, overline grow and fade to zero and delete the object early when fade finishes (won't override fadein since in different category)
+	- overline fades on its own
+- overline appears at timestamp on top of sprite
+- wait until late time passes, and fall downwards over 1 beat, and turn red (so early/late * 2 + 30), then delete if not already deleted
+- timing window notes render when their hitwindow enters at zero opacity, on hit go to 100 opacity and grow, then delete
+
+key-keep:
+- base, font, approach fade in over early time/2 on object creation
+
+key-hit: 
+- base, font, approach fade in over early time/2 on object creation
+
+
