@@ -1,6 +1,33 @@
-- the fade-in on key notes appears to be 50% of the early/late time
+C:\Users\samlo\AppData\Roaming\RhythmSpell\EditorLVL\!test1
+
+- need to fix the overline dissapearing too fast
+- split numbers to appear in their own "key-type", so that the pulse can be positioned on the actual key object
+- move the numbers down a bit udner repeat[5]
+- actually have an overline for key-hit lol
 
 
+- support scale
+- support custom fonts
+- acutally preview the thingy
+
+-Nitro-ri's here, just checking everything is ok!-
+levelinfo|!test1|0|0||1|15 takemehigher [128 bpm]2167533949.mp3|180.0|||15 takemehigher [128 bpm]||||||7200.0|7|2025-12-30T16:27:18|2025-12-28T09:59:23z105499o65c57351014h368f||a4a4a4ff|-1|||0|a4a4a4ff|
+config|0.25|0.0|false|32|32|0|8|true|true|true|0|30.0|179.97|2|1.0|1.0|a|true|240.0|240.0|false
+keyTouch|a|120.0|120.0|352.0|264.0|1.0|1.0|0|-1
+keyKeep|b|150.0|120.0|544.0|264.0|1.0|1.0|0|30.0|false|0|0|-1
+keyKeep|c|180.0|120.0|768.0|264.0|1.0|1.0|0|30.0|true|288.0|160.0|-1
+keyHit|d|210.0|120.0|1120.0|264.0|1.0|1.0|0|300.0|11.0|-1
+
+count up all the groups for the key-hit
+base - counter + 1
+approach - counter 
+pulse - counter 
+shadow - counter + 1
+overline - counter + 1
+
+
+-font images do not render
+-then the notes seem to have the wrong position for some reaosn
 100%-80% accuracy: YEAH!
 >80%-65% accuracy: NICE!
 >65%-50% accuracy: GOOD
