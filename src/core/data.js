@@ -288,6 +288,21 @@ export const KEY_SPRITES = {
                 { fn: onHit, args:[timeToOffset(250).toString(), 2.5]}, //grow to 2.5x, fade over 250ms
             ])
         },
+        overline:{
+            filename:obj=>`key-hit-overline.png`,
+            scale:"1.0",
+            zIndex:"2",
+            opacity:"1.0",
+            rotation: "0.0",
+            group: (counter, obj) => counter + 1,
+            creationTime: obj => obj[2] - obj[3], //create at note timestamp
+            lifetime: obj => obj[3]+timeToOffset(500)+obj[11]*obj[12], //exist for the length of early/late time plus 1 beat buffer
+            actions: obj =>([
+                { fn:appear, args:[0, obj[3]]}, //instantly set opacity to 100% when the early/late time passes
+                { fn:onHit, args:[timeToOffset(250).toString(), 1.5]}, //grow to 1.5x, fade over 250ms
+                { fn:onMiss, args:[timeToOffset(500).toString()] }, //play the miss animation over 500ms
+            ])
+        },
         pulse:{
             filename:obj=>`key-hit-pulse.png`,
             scale:"1.0",
@@ -316,7 +331,7 @@ export const KEY_SPRITES = {
                 { fn:appear, args:[1, 0.0]}, //instantly set opacity to 100% when hit
                 { fn:repeatGrow, args:[obj[11]-1, obj[12], obj[3]]}, //grow to 1x, repeated the noteCount times over hitInterval, but delay that animation by the early/late time
                 { fn:onMiss, args:[timeToOffset(500).toString()] }, //play the miss animation over 500ms
-                { fn: onHit, args:[timeToOffset(100).toString(), 1.5]}, //grow to 3x, fade over 100ms
+                { fn:onHit, args:[timeToOffset(100).toString(), 1.5]}, //grow to 3x, fade over 100ms
             ])
         },
         font:{
@@ -335,21 +350,7 @@ export const KEY_SPRITES = {
             ])
         },
     },
-
-    KEY_HIT_REPEAT:{
-        pulse:{
-            filename:obj=>`key-hit-pulse.png`,
-            scale:"1.0",
-            zIndex:"1",
-            opacity:"0.0",
-            rotation: "0.0",
-            creationTime: obj => obj[2], //create at note timestamp minus early/late time
-            lifetime: obj => obj[3]*2+timeToOffset(500), //exist for the length of early/late time + 500ms buffer
-            actions: obj =>([
-                { fn: appear, args:[1, 0.0]}, //instantly set opacity to 100% when hit
-                { fn: onHit, args:[timeToOffset(100).toString(), 1.5]}, //grow to 3x, fade over 100ms
-            ])
-        },
+    KEY_HIT_REPEAT_FONT:{
         font:{
             filename:obj=>`Font${obj[12]}.png`, //uses the letter that's acutally being hit
             scale:"0.5",
@@ -363,6 +364,21 @@ export const KEY_SPRITES = {
                 { fn: onHit, args:[timeToOffset(0).toString(), 1.5]}, //grow to 3x, fade over 0ms
             ])
         },
+    },
+    KEY_HIT_REPEAT_PULSE:{
+        pulse:{
+            filename:obj=>`key-hit-pulse.png`,
+            scale:"1.0",
+            zIndex:"1",
+            opacity:"0.0",
+            rotation: "0.0",
+            creationTime: obj => obj[2], //create at note timestamp minus early/late time
+            lifetime: obj => obj[3]*2+timeToOffset(500), //exist for the length of early/late time + 500ms buffer
+            actions: obj =>([
+                { fn: appear, args:[1, 0.0]}, //instantly set opacity to 100% when hit
+                { fn: onHit, args:[timeToOffset(100).toString(), 1.5]}, //grow to 3x, fade over 100ms
+            ])
+        }
     }
 }
 

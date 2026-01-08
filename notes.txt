@@ -1,9 +1,5 @@
 C:\Users\samlo\AppData\Roaming\RhythmSpell\EditorLVL\!test1
 
-- need to fix the overline dissapearing too fast
-- split numbers to appear in their own "key-type", so that the pulse can be positioned on the actual key object
-- move the numbers down a bit udner repeat[5]
-- actually have an overline for key-hit lol
 
 
 - support scale
@@ -11,7 +7,7 @@ C:\Users\samlo\AppData\Roaming\RhythmSpell\EditorLVL\!test1
 - acutally preview the thingy
 
 -Nitro-ri's here, just checking everything is ok!-
-levelinfo|!test1|0|0||1|15 takemehigher [128 bpm]2167533949.mp3|180.0|||15 takemehigher [128 bpm]||||||7200.0|7|2025-12-30T16:27:18|2025-12-28T09:59:23z105499o65c57351014h368f||a4a4a4ff|-1|||0|a4a4a4ff|
+levelinfo|!test2|0|0||1|15 takemehigher [128 bpm]2167533949.mp3|180.0|||15 takemehigher [128 bpm]||||||7200.0|7|2025-12-30T16:27:18|2025-12-28T09:59:23z105499o65c57351014h368f||a4a4a4ff|-1|||0|a4a4a4ff|
 config|0.25|0.0|false|32|32|0|8|true|true|true|0|30.0|179.97|2|1.0|1.0|a|true|240.0|240.0|false
 keyTouch|a|120.0|120.0|352.0|264.0|1.0|1.0|0|-1
 keyKeep|b|150.0|120.0|544.0|264.0|1.0|1.0|0|30.0|false|0|0|-1

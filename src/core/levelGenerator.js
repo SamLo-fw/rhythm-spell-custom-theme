@@ -278,7 +278,6 @@ function levelFileGenerator(){
         //urg. repeated code no matter what but at least this way it's not super indented.
         
         
-        spriteData = KEY_SPRITES["KEY_HIT_REPEAT"];
 
         //This part stacks a bunch of extra notes on top which each dissapear when hit/the timing window for the next number happens.
         //They should layer underneath the main note, and be added in reverse timing order so that the largest number layers on top.
@@ -291,6 +290,11 @@ function levelFileGenerator(){
             objectArrayCopyRepeat[9] = counter;
             const hiddenRepeat = generateNoteString(objectArrayCopyRepeat);
             noteData.push(hiddenRepeat);
+            spriteData = KEY_SPRITES["KEY_HIT_REPEAT_PULSE"];
+            for(const sprite in spriteData){
+                const spriteDefenition = spriteData[sprite];
+                noteData.push(handleSprite(objectArrayCopyRepeat, spriteDefenition));
+            }
 
             const index = noteCount - i;
             const digitCount = Math.floor(Math.log10(index)) + 1;
@@ -298,9 +302,11 @@ function levelFileGenerator(){
             const xStart = objectArrayCopyRepeat[4] - 16*((digitCount-1)/2); //icons are 64px so we just move over by 64 each digit
             objectArrayCopyRepeat.push("0");
             let value = index;
+            spriteData = KEY_SPRITES["KEY_HIT_REPEAT_FONT"];
             for(let j=digitCount-1; j>=0; j--){
                 objectArrayCopyRepeat[12] = (value % 10).toString(); //cursed
                 objectArrayCopyRepeat[4] = xStart + j*32;
+                objectArrayCopyRepeat[5] = objectArrayCopyRepeat[5]+32;
                 for(const sprite in spriteData){
                     const spriteDefenition = spriteData[sprite];
                     noteData.push(handleSprite(objectArrayCopyRepeat, spriteDefenition));
